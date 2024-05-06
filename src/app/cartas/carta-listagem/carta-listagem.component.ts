@@ -1,15 +1,11 @@
 import { Component } from '@angular/core';
+import { Carta } from '../../shared/model/carta';
+import { CartaSeletor } from '../../shared/model/seletor/carta.seletor';
+import { CartasService } from '../../shared/service/cartas.service';
 
 //Entidade Carta
 //Depois sera substituido por arquivo com a entidade
-export interface Carta{
-  id: number,
-  nome: string,
-  forca: number,
-  inteligencia: number,
-  velocidade: number,
-  dataCadastro: Date
-}
+
 
 @Component({
   selector: 'app-carta-listagem',
@@ -18,14 +14,26 @@ export interface Carta{
 })
 export class CartaListagemComponent {
 
-  public cartas: Carta[] = [
-    {id: 1, nome: 'Pelé', forca: 5, inteligencia: 5, velocidade: 5, dataCadastro: new Date()},
-    {id: 2, nome: 'Luciano K.', forca: 2, inteligencia: 5, velocidade: 3, dataCadastro: new Date()},
-    {id: 3, nome: 'CR7', forca: 5, inteligencia: 3, velocidade: 4, dataCadastro: new Date()},
-  ]
+  public cartas: Carta[] = [];
+  public seletor: CartaSeletor = new CartaSeletor();
 
-  constructor() { }
+  constructor(private cartaService: CartasService) { }
 
   ngOnInit(): void {
+  }
+
+  pesquisar(){
+    this.cartaService.listarComSeletor(this.seletor).subscribe(
+      resultado => {
+        this.cartas = resultado;
+      },
+      erro => {
+        console.error('Erro ao consultar cartas', erro);
+      }
+    );
+  }
+
+  public limpar(){
+    this.seletor = new CartaSeletor
   }
 }
