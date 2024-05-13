@@ -1,0 +1,58 @@
+<body>
+   <h1>CARRROS</h1>
+    <table>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 50%;
+            }
+    
+            th, td {
+                padding: 8px; 
+                text-align: center;
+                border-bottom: 10px solid #ddd; 
+
+            }
+        </style>
+
+    <thead>
+      <tr>
+        <th>Placa</th>
+        <th>Modelo</th>
+        <th>Montadora</th>
+        <th>Ano</th>
+        <th>Valor</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let carro of carros">
+        <td>{{ carro.placa }}</td>
+        <td>{{ carro.modelo }}</td>
+        <td>{{ carro.montadora.nome }}</td>
+        <td>{{ carro.ano }}</td>
+        <td>{{ carro.valor }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h1>FILTROS</h1>
+  <div>
+    <label style="margin-right: 10px;" for="marca">Nome da Marca:</label>
+    <input type="text" id="marca" [(ngModel)]="filtroMarca" (input)="aplicarFiltros()">
+  </div>
+  <div style="margin-top: 10px;">
+    <label style="margin-right: 10px;" for="modelo">Modelo:</label>
+    <input type="text" id="modelo" [(ngModel)]="filtroModelo" (input)="aplicarFiltros()">
+  </div>
+  <div style="margin-top: 10px;">
+    <label style="margin-right: 10px;" for="anoInicial">Ano Inicial:</label>
+    <input type="number" id="anoInicial" [(ngModel)]="filtroAnoInicial" (input)="aplicarFiltros()">
+  </div>
+  <div style="margin-top: 10px;">
+    <label style="margin-right: 10px;" for="anoFinal">Ano Final:</label>
+    <input type="number" id="anoFinal" [(ngModel)]="filtroAnoFinal" (input)="aplicarFiltros()">
+  </div>
+  
+
+  
+  
